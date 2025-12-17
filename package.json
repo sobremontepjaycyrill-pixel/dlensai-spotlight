@@ -1,0 +1,16 @@
+{
+  "name": "dlenesai-spotlight",
+  "version": "1.0.0",
+  "main": "spotlight.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Generate DLENSAI stock spotlight HTML via OpenAI (CLI + Vercel serverless API)",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "openai": "^6.10.0"
+  }
+}

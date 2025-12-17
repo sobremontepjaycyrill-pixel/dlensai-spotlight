@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DLENSAI Spotlight Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #121824;
+      --muted: #9eb3c9;
+      --text: #e6edf3;
+      --accent: #6ce0c3;
+      --accent-2: #5aa0ff;
+      --border: #1f2a3a;
+      --error: #ff7b8a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 15% 20%, #1c2a3b, var(--bg) 45%),
+                  radial-gradient(circle at 85% 10%, #14253b, var(--bg) 35%),
+                  radial-gradient(circle at 30% 80%, #0c1c2d, var(--bg) 40%),
+                  var(--bg);
+      color: var(--text);
+      font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 32px 16px 48px;
+    }
+
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .kicker {
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.05;
+      font-weight: 600;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .panel {
+      background: linear-gradient(135deg, rgba(108, 224, 195, 0.12), rgba(90, 160, 255, 0.14));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (min-width: 720px) {
+      .panel {
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        padding: 22px;
+      }
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0f1520;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus {
+      border-color: rgba(108, 224, 195, 0.7);
+      box-shadow: 0 0 0 3px rgba(108, 224, 195, 0.15);
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0b111b;
+      box-shadow: 0 10px 30px rgba(90, 160, 255, 0.35);
+    }
+
+    .primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .secondary {
+      background: #0f1520;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    button:not(:disabled):active {
+      transform: translateY(1px);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .status {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--muted);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(108, 224, 195, 0.5);
+      transition: background 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .dot.live {
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(108, 224, 195, 0.08);
+    }
+
+    .dot.error {
+      background: var(--error);
+      box-shadow: 0 0 0 8px rgba(255, 123, 138, 0.12);
+    }
+
+    .results {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 420px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #0f1520;
+    }
+
+    .empty {
+      border: 1px dashed var(--border);
+      padding: 30px;
+      border-radius: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <span class="kicker">DLENSAI Spotlight</span>
+      <h1>Generate branded stock spotlights on Vercel.</h1>
+      <p class="lede">Feed a ticker and horizon, let the OpenAI model craft a ready-to-send HTML report. Works locally or once you deploy this repo to Vercel with your API keys.</p>
+    </header>
+
+    <form id="spotlight-form" class="panel">
+      <div class="field">
+        <label for="ticker">Ticker</label>
+        <input id="ticker" name="ticker" type="text" placeholder="TSLA" required maxlength="10" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="term">Term (years)</label>
+        <input id="term" name="term" type="number" min="1" max="50" step="1" placeholder="10" required />
+      </div>
+      <div class="actions">
+        <button id="submit" class="primary" type="submit">Generate Spotlight</button>
+        <p class="hint">Make sure your OpenAI keys are set as environment variables on Vercel.</p>
+      </div>
+    </form>
+
+    <div class="status" id="status">
+      <span class="dot" id="status-dot"></span>
+      <span id="status-text">Waiting for a request.</span>
+    </div>
+
+    <div class="results">
+      <div class="result-actions" id="result-actions" style="display:none;">
+        <a id="download-link" class="secondary" style="display:inline-block; padding: 12px 14px; text-decoration:none;" href="#" download>Download HTML</a>
+        <button id="open-preview" class="secondary" type="button">Open in new tab</button>
+      </div>
+      <div id="preview-wrapper" class="empty">
+        No report yet. Generate one to preview it here.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('spotlight-form');
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+    const submitButton = document.getElementById('submit');
+    let previewWrapper = document.getElementById('preview-wrapper');
+    const downloadLink = document.getElementById('download-link');
+    const openPreviewButton = document.getElementById('open-preview');
+    const resultActions = document.getElementById('result-actions');
+
+    let lastBlobUrl = null;
+
+    function setStatus(text, state = 'idle') {
+      statusText.textContent = text;
+      statusDot.className = 'dot';
+      if (state === 'loading') statusDot.classList.add('live');
+      if (state === 'error') statusDot.classList.add('error');
+    }
+
+    function setPreview(html) {
+      if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      lastBlobUrl = url;
+
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('sandbox', '');
+      iframe.src = url;
+
+      previewWrapper.replaceWith(iframe);
+      iframe.id = 'preview-wrapper';
+      previewWrapper = iframe; // keep reference updated
+
+      downloadLink.href = url;
+      resultActions.style.display = 'flex';
+    }
+
+    function resetPreview() {
+      resultActions.style.display = 'none';
+      if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+      lastBlobUrl = null;
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.id = 'preview-wrapper';
+      empty.textContent = 'No report yet. Generate one to preview it here.';
+      previewWrapper.replaceWith(empty);
+      previewWrapper = empty;
+    }
+
+    function validateInputs(ticker, termYears) {
+      if (!ticker || !ticker.trim()) return 'Ticker is required.';
+      if (!termYears || Number.isNaN(termYears)) return 'Term must be a number.';
+      if (termYears <= 0) return 'Term must be at least 1 year.';
+      return '';
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const ticker = document.getElementById('ticker').value.trim();
+      const termYears = Number(document.getElementById('term').value);
+
+      const error = validateInputs(ticker, termYears);
+      if (error) {
+        setStatus(error, 'error');
+        return;
+      }
+
+      setStatus('Generating spotlight...', 'loading');
+      submitButton.disabled = true;
+
+      try {
+        const response = await fetch('/api/spotlight', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ticker, termYears }),
+        });
+
+        if (!response.ok) {
+          const { error, message } = await response.json().catch(() => ({}));
+          throw new Error(error || message || `Request failed (${response.status})`);
+        }
+
+        const data = await response.json();
+        const html = data.html || '';
+        if (!html.trim()) throw new Error('API returned an empty report.');
+
+        setPreview(html);
+        setStatus(`Spotlight ready: ${data.filename || 'download.html'}`, 'idle');
+        openPreviewButton.onclick = () => window.open(lastBlobUrl, '_blank');
+        downloadLink.download = data.filename || 'spotlight.html';
+      } catch (err) {
+        console.error(err);
+        setStatus(err.message, 'error');
+        resetPreview();
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    resetPreview();
+  </script>
+</body>
+</html>
