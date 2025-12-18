@@ -1,7 +1,6 @@
 You are running in DLENS v16_1 mode.
 
-You MUST follow the attached DLENS documents as binding system rules, in this order of priority:
-
+You MUST follow the DLENS documents as binding system rules, in this order of priority:
 1) DLENS_v16_1_Gold_Definitions_and_Rules_Light.html
 2) DLENS_v16_0_Overlay_Evidence_Roles_InsightCards_Light.html
 3) DLENS_v16_0_Disruptive_Sectors_ECO_Tags_Light.html
@@ -9,194 +8,41 @@ You MUST follow the attached DLENS documents as binding system rules, in this or
 5) DLENS_Physical_AI_Thesis_v16_Light.html
 6) DLENS_v16_1_System_MasterPrompt_Hunt_Spotlight_Light.html
 7) DLENS_v16_0_UI_Dropdown_Spec_Hunt_Spotlight_Light.html
-8) DLENS_DisruptorHunt_v16_Gold_Standard_Example_Report_AllSectors_6y_NoCap_30_Light.html
-9) DLENS_DisruptorHunt_v16_Gold_Standard_Example_Report_AllSectors_6y_Max16_30_Gold_Light.html
-10) DLENS_Spotlight_TSLA_10y_v16_Gold_Standard_Example_Report_TruthPills.html
 
-The TSLA v16_1 Spotlight is the STRUCTURAL GOLD STANDARD.
-You must copy its layout, CSS, section order, and formatting — but rewrite ALL company-specific prose.
+IMPORTANT:
+- Gold Standard Spotlights are STRUCTURAL REFERENCES ONLY.
+- DO NOT reuse any company, ticker, CSP, or prose from examples.
+- All analysis must be recalculated for the target company.
 
----
-
-## TASK
-
-Create a DLENS v16_1 Disruptor Spotlight report for:
+TASK:
+Create a DLENS v16_1 Disruptor Spotlight report with the following parameters:
 
 - Company: {{COMPANY_NAME}}
 - Ticker: {{TICKER}}
 - Term: {{N}} years (DUU horizon)
 
----
-
-## OUTPUT FORMAT (HARD REQUIREMENTS)
-
+OUTPUT REQUIREMENTS:
 - Respond ONLY with a complete HTML document.
 - The FIRST characters MUST be: <!DOCTYPE html>
-- Use the SAME light-theme CSS, layout classes, and structure as the TSLA v16_1 Gold Spotlight.
+- Use the DLENS v16_1 Spotlight layout and section order.
 - No markdown.
-- No explanations.
 - No commentary.
-- No acknowledgments.
-- Do not omit any numbered section.
+- No acknowledgements.
 
----
-
-## HEADER & META (COPY TSLA GOLD)
-
-- Same header layout as TSLA Gold:
-  - Eyebrow label
-  - H1: “Company Name (TICKER) — N-Year Horizon”
-  - Meta row with:
-    - CSP (Current Stock Price)
-    - CSP timestamp (real-time anchored)
-    - DUU Score
-    - DUU Probability
-    - Role / DUU ECO
-  - Pill chips row
-  - TradingView price chart block (same placement and structure)
-
-CSP value and timestamp MUST be reused consistently in Section 2.
-
----
-
-## REQUIRED BODY SECTIONS (EXACT ORDER & TITLES)
-
-You MUST include ALL sections below, in this exact order and with these exact <h2> titles:
-
+REQUIRED SECTIONS (in order):
 1) Short Summary (plain language)
 2) Disruption Lens (DUU, HC & DDI)
 3) Business Snapshot & Paradigm Shift
 4) Ecosystem & Positioning (DUU ECO)
 5) Feasibility & Risk (XDLens-E / XDLens-S / Science Dependency)
 6) FEP, FVU & Frogfree
-7) Peer Comparison — STRICT 5-COLUMN TABLE
+7) Peer Comparison — 5-column table
 8) Truth Audit (v16)
 9) Key KPIs to Monitor
-10) Milestones & Timelines (Ny horizon)
-11) What Would Change the View? (Up-rate / Down-rate triggers)
+10) Milestones & Timelines
+11) What Would Change the View?
 12) Risks, Subsidy Dependence & Watch-outs
 13) Decision-Ready Conclusion
 
-After section 13, ALWAYS include:
-
-- “Key to Terms (DLENS v16 Spotlight)” inside a <div class="keyterms"> using the same structure as TSLA Gold.
-- Definitions must be DLENS-generic (no company-specific wording).
-
----
-
-## SECTION-SPECIFIC REQUIREMENTS
-
-### 1) Short Summary (plain language)
-- Plain-language description of what the company does and why it matters.
-- Follow with a short DLENS framing paragraph:
-  - Role
-  - DUU
-  - Probability
-  - Paradigm shift over N years
-
-### 2) Disruption Lens (DUU, HC & DDI)
-- Use the same `.kv` grid as TSLA Gold.
-- REQUIRED rows:
-  - CSP (with timestamp)
-  - DUU Score (0–10)
-  - DUU Price, N{{N}}
-  - DUU Probability (%)
-  - High-Confidence (HC) Price, N{{N}}
-  - Disruption Depth Index (DDI + Tier)
-- End with a short “Translation” paragraph.
-
-### 3) Business Snapshot & Paradigm Shift
-- Core business lines
-- Revenue drivers
-- Moat
-- How the paradigm changes over the chosen horizon
-
-### 4) Ecosystem & Positioning (DUU ECO)
-- DUU ECO role(s)
-- Position in value chain
-- Relationship to upstream/downstream players
-- Paradigm comparison vs incumbents
-
-### 5) Feasibility & Risk (XDLens-E / XDLens-S / Science Dependency)
-- MUST use the two-column `.kv` layout.
-- REQUIRED rows:
-  - XDLens-E (execution)
-  - XDLens-S (systemic/external)
-  - Science Dependency (0–10)
-- You may add:
-  - Evidence Weight
-  - Mix E/S %
-- Keep explanations concise and decision-oriented.
-
-### 6) FEP, FVU & Frogfree
-- Required FEP (value CAGR)
-- FVU band
-- Frogfree %
-- Evidence Weight (EW)
-- Extra-Time ROI (ETR)
-- Tie explicitly to v16_1 rules.
-
-### 7) Peer Comparison — STRICT 5-COLUMN TABLE
-- Use a <table> inside `.table-wrap`.
-- EXACTLY 5 columns:
-  - Company
-  - Technology / Approach
-  - Scale / Market Signal
-  - Subsidy Dependence
-  - Relative Positioning
-- Include 4–6 rows including the target company.
-
-### 8) Truth Audit (v16)
-- Use `.truth-block` and `.truth-pill` layout.
-- REQUIRED pills:
-  - DUU Probability
-  - Utility
-  - Frogfree
-  - Evidence Weight
-  - Extra-Time ROI
-- Below pills, include bullets for:
-  - Effect sizes
-  - Key sensitivities
-  - Counter-arguments
-  - DLENS rebuttals
-
-### 9) Key KPIs to Monitor
-- 6–10 bullet KPIs.
-- Directly tied to DUU, execution, and paradigm shift.
-- Company-specific and measurable.
-
-### 10) Milestones & Timelines (Ny horizon)
-- 4–8 milestones.
-- Grouped by approximate timing (e.g., Years 1–2 / 3–5 / 6–N).
-- Each milestone must map to a key uncertainty.
-
-### 11) What Would Change the View?
-- Separate bullets for:
-  - Up-rate triggers
-  - Down-rate triggers
-- 3–6 items per side.
-- Must be measurable and falsifiable.
-
-### 12) Risks, Subsidy Dependence & Watch-outs
-- Core risks
-- Explicit subsidy dependence analysis
-- Key monitoring areas per v16_1 rules
-
-### 13) Decision-Ready Conclusion
-- Concise synthesis paragraph.
-- Explicit:
-  - Up-rate triggers
-  - Down-rate triggers
-  - Re-rate conditions
-- End with a single one-line stance.
-
----
-
-## GUARDRAILS (NON-NEGOTIABLE)
-
-- Never omit a numbered section.
-- If evidence is thin, include the section and state assumptions explicitly.
-- Copy layout and structure — NOT TSLA-specific language.
-- Keep tone decision-ready, analytical, and DLENS-consistent.
-
-END.
+After section 13, include:
+- “Key to Terms (DLENS v16 Spotlight)” section using generic definitions.
