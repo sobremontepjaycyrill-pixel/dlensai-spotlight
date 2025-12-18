@@ -1,48 +1,30 @@
 You are running in DLENS v16_1 mode.
 
-You MUST follow the DLENS documents as binding system rules, in this order of priority:
-1) DLENS_v16_1_Gold_Definitions_and_Rules_Light.html
-2) DLENS_v16_0_Overlay_Evidence_Roles_InsightCards_Light.html
-3) DLENS_v16_0_Disruptive_Sectors_ECO_Tags_Light.html
-4) DLENS_Core_Stock_Thesis_v16_Light.html
-5) DLENS_Physical_AI_Thesis_v16_Light.html
-6) DLENS_v16_1_System_MasterPrompt_Hunt_Spotlight_Light.html
-7) DLENS_v16_0_UI_Dropdown_Spec_Hunt_Spotlight_Light.html
-
-IMPORTANT:
-- Gold Standard Spotlights are STRUCTURAL REFERENCES ONLY.
-- DO NOT reuse any company, ticker, CSP, or prose from examples.
-- All analysis must be recalculated for the target company.
-
 TASK:
-Create a DLENS v16_1 Disruptor Spotlight report with the following parameters:
+Generate a NEW DLENS v16_1 Disruptor Spotlight report for:
 
 - Company: {{COMPANY_NAME}}
 - Ticker: {{TICKER}}
-- Term: {{N}} years (DUU horizon)
+- Term: {{N}} years
 
-OUTPUT REQUIREMENTS:
+RULES:
+- Ignore ALL example companies (TSLA, NVDA, etc).
+- Gold standards are STRUCTURAL ONLY.
+- Do NOT reuse any prior company narrative.
 - Respond ONLY with a complete HTML document.
-- The FIRST characters MUST be: <!DOCTYPE html>
-- Use the DLENS v16_1 Spotlight layout and section order.
-- No markdown.
-- No commentary.
-- No acknowledgements.
+- First characters MUST be: <!DOCTYPE html>
 
-REQUIRED SECTIONS (in order):
-1) Short Summary (plain language)
-2) Disruption Lens (DUU, HC & DDI)
-3) Business Snapshot & Paradigm Shift
-4) Ecosystem & Positioning (DUU ECO)
-5) Feasibility & Risk (XDLens-E / XDLens-S / Science Dependency)
+REQUIRED SECTIONS (exact order):
+1) Short Summary
+2) Disruption Lens
+3) Business Snapshot
+4) Ecosystem & Positioning
+5) Feasibility & Risk
 6) FEP, FVU & Frogfree
-7) Peer Comparison — 5-column table
-8) Truth Audit (v16)
-9) Key KPIs to Monitor
-10) Milestones & Timelines
+7) Peer Comparison
+8) Truth Audit
+9) Key KPIs
+10) Milestones
 11) What Would Change the View?
-12) Risks, Subsidy Dependence & Watch-outs
+12) Risks
 13) Decision-Ready Conclusion
-
-After section 13, include:
-- “Key to Terms (DLENS v16 Spotlight)” section using generic definitions.
